@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -32,6 +33,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        compose true
     }
     buildToolsVersion '36.0.0'
 }
@@ -43,9 +45,9 @@ dependencies {
     implementation libs.navigation.fragment
     implementation libs.navigation.ui
     implementation libs.annotation
-    implementation libs.lifecycle.livedata.ktx
-    implementation libs.lifecycle.viewmodel.ktx
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    implementation libs.drawerlayout
+    implementation libs.material.v1110
 }
