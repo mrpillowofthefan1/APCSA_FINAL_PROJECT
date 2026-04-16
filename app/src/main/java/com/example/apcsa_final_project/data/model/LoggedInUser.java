@@ -6,10 +6,12 @@ package com.example.apcsa_final_project.data.model;
 public class LoggedInUser {
 
     private String userId;
+    private String role;
     private String displayName;
 
-    public LoggedInUser(String userId, String displayName) {
+    public LoggedInUser(String userId, String role, String displayName) {
         this.userId = userId;
+        this.role = role;
         this.displayName = displayName;
     }
 
