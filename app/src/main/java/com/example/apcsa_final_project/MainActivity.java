@@ -1,5 +1,6 @@
 package com.example.apcsa_final_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.navigation.NavigationView;
@@ -54,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Handle the selected item based on its ID
                 if (item.getItemId() == R.id.nav_account) {
-                    Toast.makeText(MainActivity.this,
-                            "Account Details", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, FirstFragment.class);
+                    startActivity(intent);
                 }
 
                 if (item.getItemId() == R.id.nav_settings) {
-                    Toast.makeText(MainActivity.this,
-                            "Settings Opened", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, SecondFragment.class);
+                    startActivity(intent);
                 }
 
                 if (item.getItemId() == R.id.nav_logout) {
