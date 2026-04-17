@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".Chat"
+            android:exported="false" />
+        <activity
+            android:name=".Market"
+            android:exported="false" />
+        <activity
             android:name=".Forum"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
