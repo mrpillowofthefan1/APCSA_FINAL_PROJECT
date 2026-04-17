@@ -8,6 +8,4 @@
     tools:context=".StartGuide">
     <include layout="@layout/activity_main"/>
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
