@@ -54,19 +54,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Handle the selected item based on its ID
-                if (item.getItemId() == R.id.nav_account) {
-                    Intent intent = new Intent(MainActivity.this, FirstFragment.class);
+                if (item.getItemId() == R.id.nav_home) {
+                    Intent intent = new Intent(MainActivity.this, Home.class);
                     startActivity(intent);
                 }
 
-                if (item.getItemId() == R.id.nav_settings) {
-                    Intent intent = new Intent(MainActivity.this, SecondFragment.class);
+                if (item.getItemId() == R.id.nav_forum) {
+                    Intent intent = new Intent(MainActivity.this, Forum.class);
                     startActivity(intent);
                 }
 
-                if (item.getItemId() == R.id.nav_logout) {
-                    Toast.makeText(MainActivity.this,
-                            "You are Logged Out", Toast.LENGTH_SHORT).show();
+                if (item.getItemId() == R.id.nav_start_guide) {
+                    Intent intent = new Intent(MainActivity.this, StartGuide.class);
+                    startActivity(intent);
                 }
 
                 drawerLayout.closeDrawers();
