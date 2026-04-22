@@ -39,6 +39,8 @@ public class Chat extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
 
+        toolbar.setTitle("Chat");
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
 
@@ -55,20 +57,30 @@ public class Chat extends AppCompatActivity {
                 if (item.getItemId() == R.id.nav_home) {
                     Intent intent = new Intent(Chat.this, Home.class);
                     startActivity(intent);
+                    toolbar.setTitle("Home");
                 }
 
                 if (item.getItemId() == R.id.nav_forum) {
                     Intent intent = new Intent(Chat.this, Forum.class);
                     startActivity(intent);
+                    toolbar.setTitle("Forum");
                 }
 
                 if (item.getItemId() == R.id.nav_start_guide) {
                     Intent intent = new Intent(Chat.this, StartGuide.class);
                     startActivity(intent);
+                    toolbar.setTitle("Start Guide");
+                }
+
+                if (item.getItemId() == R.id.nav_market) {
+                    Intent intent = new Intent(Chat.this, Market.class);
+                    startActivity(intent);
+                    toolbar.setTitle("Market");
                 }
 
                 if (item.getItemId() == R.id.nav_chat) {
                     // Current activity
+                    toolbar.setTitle("Chat");
                 }
 
                 drawerLayout.closeDrawers();

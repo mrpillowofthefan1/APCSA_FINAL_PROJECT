@@ -39,6 +39,8 @@ public class StartGuide extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
 
+        toolbar.setTitle("Start Guide");
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
 
@@ -55,20 +57,30 @@ public class StartGuide extends AppCompatActivity {
                 if (item.getItemId() == R.id.nav_home) {
                     Intent intent = new Intent(StartGuide.this, Home.class);
                     startActivity(intent);
+                    toolbar.setTitle("Home");
                 }
 
                 if (item.getItemId() == R.id.nav_forum) {
                     Intent intent = new Intent(StartGuide.this, Forum.class);
                     startActivity(intent);
+                    toolbar.setTitle("Forum");
                 }
 
                 if (item.getItemId() == R.id.nav_start_guide) {
                     // Current activity
+                    toolbar.setTitle("Start Guide");
+                }
+
+                if (item.getItemId() == R.id.nav_market) {
+                    Intent intent = new Intent(StartGuide.this, Market.class);
+                    startActivity(intent);
+                    toolbar.setTitle("Market");
                 }
 
                 if (item.getItemId() == R.id.nav_chat) {
                     Intent intent = new Intent(StartGuide.this, Chat.class);
                     startActivity(intent);
+                    toolbar.setTitle("Chat");
                 }
 
                 drawerLayout.closeDrawers();

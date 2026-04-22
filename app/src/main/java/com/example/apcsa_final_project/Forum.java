@@ -40,6 +40,8 @@ public class Forum extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
 
+        toolbar.setTitle("Forum");
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
 
@@ -55,14 +57,19 @@ public class Forum extends AppCompatActivity {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
                     startActivity(new Intent(Forum.this, Home.class));
+                    toolbar.setTitle("Home");
                 } else if (id == R.id.nav_forum) {
+                    toolbar.setTitle("Forum");
                     // Current activity
                 } else if (id == R.id.nav_start_guide) {
                     startActivity(new Intent(Forum.this, StartGuide.class));
+                    toolbar.setTitle("Start Guide");
                 } else if (id == R.id.nav_market) {
                     startActivity(new Intent(Forum.this, Market.class));
+                    toolbar.setTitle("Market");
                 } else if (id == R.id.nav_chat) {
                     startActivity(new Intent(Forum.this, Chat.class));
+                    toolbar.setTitle("Chat");
                 }
 
                 drawerLayout.closeDrawers();

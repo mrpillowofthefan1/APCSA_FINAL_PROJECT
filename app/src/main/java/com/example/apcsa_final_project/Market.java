@@ -29,7 +29,7 @@ public class Market extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_start_guide);
+        setContentView(R.layout.activity_market);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             return insets;
@@ -38,6 +38,8 @@ public class Market extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
+
+        toolbar.setTitle("Market");
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
@@ -55,20 +57,30 @@ public class Market extends AppCompatActivity {
                 if (item.getItemId() == R.id.nav_home) {
                     Intent intent = new Intent(Market.this, Home.class);
                     startActivity(intent);
+                    toolbar.setTitle("Home");
                 }
 
                 if (item.getItemId() == R.id.nav_forum) {
                     Intent intent = new Intent(Market.this, Forum.class);
                     startActivity(intent);
+                    toolbar.setTitle("Forum");
                 }
 
                 if (item.getItemId() == R.id.nav_start_guide) {
+                    Intent intent = new Intent(Market.this, StartGuide.class);
+                    startActivity(intent);
+                    toolbar.setTitle("Start Guide");
+                }
+
+                if (item.getItemId() == R.id.nav_market) {
                     // Current activity
+                    toolbar.setTitle("Market");
                 }
 
                 if (item.getItemId() == R.id.nav_chat) {
                     Intent intent = new Intent(Market.this, Chat.class);
                     startActivity(intent);
+                    toolbar.setTitle("Chat");
                 }
 
                 drawerLayout.closeDrawers();

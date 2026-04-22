@@ -39,6 +39,8 @@ public class Home extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
 
+        toolbar.setTitle("Home");
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
 
@@ -53,22 +55,30 @@ public class Home extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Handle the selected item based on its ID
                 if (item.getItemId() == R.id.nav_home) {
-                    // Current activity
+                    toolbar.setTitle("Home");
                 }
-
                 if (item.getItemId() == R.id.nav_forum) {
                     Intent intent = new Intent(Home.this, Forum.class);
                     startActivity(intent);
+                    toolbar.setTitle("Forum");
                 }
 
                 if (item.getItemId() == R.id.nav_start_guide) {
                     Intent intent = new Intent(Home.this, StartGuide.class);
                     startActivity(intent);
+                    toolbar.setTitle("Start Guide");
+                }
+
+                if (item.getItemId() == R.id.nav_market) {
+                    Intent intent = new Intent(Home.this, Market.class);
+                    startActivity(intent);
+                    toolbar.setTitle("Market");
                 }
 
                 if (item.getItemId() == R.id.nav_chat) {
                     Intent intent = new Intent(Home.this, Chat.class);
                     startActivity(intent);
+                    toolbar.setTitle("Chat");
                 }
 
                 drawerLayout.closeDrawers();

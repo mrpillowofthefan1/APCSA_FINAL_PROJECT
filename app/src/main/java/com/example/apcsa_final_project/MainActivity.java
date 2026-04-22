@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
 
         toggle.syncState();
-
+        toolbar.setTitle("Home");
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -57,17 +57,33 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.nav_home) {
                     Intent intent = new Intent(MainActivity.this, Home.class);
                     startActivity(intent);
+                    toolbar.setTitle("Home");
                 }
 
                 if (item.getItemId() == R.id.nav_forum) {
                     Intent intent = new Intent(MainActivity.this, Forum.class);
                     startActivity(intent);
+                    toolbar.setTitle("Forum");
                 }
 
                 if (item.getItemId() == R.id.nav_start_guide) {
                     Intent intent = new Intent(MainActivity.this, StartGuide.class);
                     startActivity(intent);
+                    toolbar.setTitle("Start Guide");
                 }
+                if (item.getItemId() == R.id.nav_market) {
+                    Intent intent = new Intent(MainActivity.this, Chat.class);
+                    startActivity(intent);
+                    toolbar.setTitle("Market");
+                }
+
+                if (item.getItemId() == R.id.nav_chat) {
+                    Intent intent = new Intent(MainActivity.this, Chat.class);
+                    startActivity(intent);
+                    toolbar.setTitle("Chat");
+                }
+
+
 
                 drawerLayout.closeDrawers();
                 return true;
