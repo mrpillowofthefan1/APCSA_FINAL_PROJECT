@@ -52,6 +52,9 @@ dependencies {
     implementation libs.drawerlayout
     implementation libs.material.v1110
     implementation libs.material.v130alpha03
-    implementation 'com.stripe:stripe-android:23.5.0'
-    implementation 'com.stripe:financial-connections:23.5.0'
+    implementation libs.financial.connections
+    implementation libs.stripe.android
+    implementation libs.stripe.java
+    implementation libs.gson
+    implementation libs.cardview
 }
