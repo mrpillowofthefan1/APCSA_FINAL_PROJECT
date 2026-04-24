@@ -1,8 +1,10 @@
 package com.example.apcsa_final_project;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -11,6 +13,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
@@ -24,6 +27,8 @@ public class StartGuide extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
+    private CardView card1;
+    private StartGuideDialogFragment startGuideBottomSheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +37,14 @@ public class StartGuide extends AppCompatActivity {
         setContentView(R.layout.activity_start_guide);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
-
+        card1 = findViewById(R.id.card_view_1);
         toolbar.setTitle("Start Guide");
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,6 +91,14 @@ public class StartGuide extends AppCompatActivity {
 
                 drawerLayout.closeDrawers();
                 return true;
+            }
+        });
+
+        card1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGuideBottomSheet = new StartGuideDialogFragment();
+                startGuideBottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
             }
         });
 
