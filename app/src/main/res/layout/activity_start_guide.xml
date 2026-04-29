@@ -59,6 +59,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
+                            android:src="@drawable/FarmBusiness"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -117,6 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
+                            android:src="@drawable/Plant"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -175,6 +177,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
+                            android:src="@drawable/ConfusedMaleModel"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -233,6 +236,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
+                            android:src="@drawable/Stocks"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -291,6 +295,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
+                            android:src="@drawable/Farmers"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
