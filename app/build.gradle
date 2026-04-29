@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.apcsa_final_project"
-        minSdk 24
+        minSdk 26
         targetSdk 36
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation libs.activity.ktx
     implementation libs.appcompat
     implementation libs.legacy.support.v4
     implementation libs.material
@@ -59,4 +60,6 @@ dependencies {
     implementation libs.stripe.java
     implementation libs.gson
     implementation libs.cardview
+    implementation 'com.sparkjava:spark-core:2.9.4'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 }

@@ -59,7 +59,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/FarmBusiness"
+                            android:src="@drawable/farm_business"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -118,7 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/Plant"
+                            android:src="@drawable/plant"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -177,7 +177,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/ConfusedMaleModel"
+                            android:src="@drawable/confused_male_model"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -236,7 +236,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/Stocks"
+                            android:src="@drawable/stocks"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -295,7 +295,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/Farmers"
+                            android:src="@drawable/farmers"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
