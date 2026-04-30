@@ -1,7 +1,5 @@
 package com.example.apcsa_final_project;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.util.Log;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.apcsa_final_project.R;
 import com.stripe.android.paymentsheet.PaymentSheet;
 import com.stripe.android.paymentsheet.PaymentSheetResult;
 import okhttp3.*;
@@ -23,6 +20,7 @@ import java.io.IOException;
 public class CheckoutActivity extends AppCompatActivity {
     private static final String TAG = "CheckoutActivity";
     private static final String BACKEND_URL = "http://10.0.2.2:4242";
+
 
     private String paymentIntentClientSecret;
     private PaymentSheet paymentSheet;

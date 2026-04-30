@@ -16,6 +16,8 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.genai.Client;
+import com.google.genai.types.GenerateContentResponse;
 
 import org.jspecify.annotations.NonNull;
 

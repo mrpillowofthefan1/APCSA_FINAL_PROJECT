@@ -19,6 +19,7 @@ import com.stripe.param.PaymentIntentCreateParams;
 
 public class PaymentServer {
     private static Gson gson = new Gson();
+    private static final String Stripe_api_key = BuildConfig.STRIPE_API_KEY;
 
     static class CreatePaymentItem {
         @SerializedName("id")
@@ -66,7 +67,7 @@ public class PaymentServer {
 
     // This is your test secret API key.
     // Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
-    public static StripeClient client = new StripeClient("sk_test_51TM9wU6BqaThljT2qOHy7Qr4sKbs1GuzfRUrKw6DKHRHvk7ZMdwY0DGHjQssqQemaTvtoPZznJqDAeTeCPDj5gRO00svfSu7Mq");
+    public static StripeClient client = new StripeClient(Stripe_api_key);
 
     public static void main(String[] args) {
         port(4242);
