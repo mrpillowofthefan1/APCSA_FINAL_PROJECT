@@ -1,5 +1,6 @@
 package com.example.apcsa_final_project;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,12 +17,34 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.genai.Chat;
 import com.google.genai.Client;
 import com.google.genai.types.GenerateContentResponse;
 
 import org.jspecify.annotations.NonNull;
 
-public class Chat extends AppCompatActivity {
+class GenerateTextFromTextInput {
+    private Client client;
+    private Chat chat;
+    public GenerateTextFromTextInput() {
+        client = new Client();
+        this.chat = client.chats.create("gemini-2.0-flash");
+
+    }
+    public String userTextToResponse(String userMsg){
+        GenerateContentResponse response =
+                client.models.generateContent(
+                        "gemini-3-flash-preview",
+                        userMsg,
+                        null);
+
+        return response.text();
+    }
+}
+
+
+public class ChatImplementation extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -57,25 +80,25 @@ public class Chat extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Handle the selected item based on its ID
                 if (item.getItemId() == R.id.nav_home) {
-                    Intent intent = new Intent(Chat.this, Home.class);
+                    Intent intent = new Intent(ChatImplementation.this, Home.class);
                     startActivity(intent);
                     toolbar.setTitle("Home");
                 }
 
                 if (item.getItemId() == R.id.nav_forum) {
-                    Intent intent = new Intent(Chat.this, Forum.class);
+                    Intent intent = new Intent(ChatImplementation.this, Forum.class);
                     startActivity(intent);
                     toolbar.setTitle("Forum");
                 }
 
                 if (item.getItemId() == R.id.nav_start_guide) {
-                    Intent intent = new Intent(Chat.this, StartGuide.class);
+                    Intent intent = new Intent(ChatImplementation.this, StartGuide.class);
                     startActivity(intent);
                     toolbar.setTitle("Start Guide");
                 }
 
                 if (item.getItemId() == R.id.nav_market) {
-                    Intent intent = new Intent(Chat.this, Market.class);
+                    Intent intent = new Intent(ChatImplementation.this, Market.class);
                     startActivity(intent);
                     toolbar.setTitle("Market");
                 }
@@ -100,5 +123,7 @@ public class Chat extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 }
