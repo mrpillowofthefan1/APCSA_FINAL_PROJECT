@@ -78,7 +78,7 @@ public class Market extends AppCompatActivity {
                 }
 
                 if (item.getItemId() == R.id.nav_chat) {
-                    Intent intent = new Intent(Market.this, Chat.class);
+                    Intent intent = new Intent(Market.this, ChatImplementation.class);
                     startActivity(intent);
                     toolbar.setTitle("Chat");
                 }

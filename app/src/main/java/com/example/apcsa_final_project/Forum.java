@@ -68,7 +68,7 @@ public class Forum extends AppCompatActivity {
                     startActivity(new Intent(Forum.this, Market.class));
                     toolbar.setTitle("Market");
                 } else if (id == R.id.nav_chat) {
-                    startActivity(new Intent(Forum.this, Chat.class));
+                    startActivity(new Intent(Forum.this, ChatImplementation.class));
                     toolbar.setTitle("Chat");
                 }
 

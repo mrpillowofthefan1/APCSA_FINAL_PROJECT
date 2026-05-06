@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
                     toolbar.setTitle("Start Guide");
                 }
                 if (item.getItemId() == R.id.nav_market) {
-                    Intent intent = new Intent(MainActivity.this, Chat.class);
+                    Intent intent = new Intent(MainActivity.this, Market.class);
                     startActivity(intent);
                     toolbar.setTitle("Market");
                 }
 
                 if (item.getItemId() == R.id.nav_chat) {
-                    Intent intent = new Intent(MainActivity.this, Chat.class);
+                    Intent intent = new Intent(MainActivity.this, ChatImplementation.class);
                     startActivity(intent);
                     toolbar.setTitle("Chat");
                 }

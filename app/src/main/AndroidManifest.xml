@@ -15,8 +15,9 @@
             android:name=".CheckoutActivity"
             android:exported="false" />
         <activity
-            android:name=".Chat"
-            android:exported="false" />
+            android:name=".ChatImplementation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Market"
             android:exported="false" />

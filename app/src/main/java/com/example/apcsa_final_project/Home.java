@@ -53,7 +53,6 @@ public class Home extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Handle the selected item based on its ID
                 if (item.getItemId() == R.id.nav_home) {
                     toolbar.setTitle("Home");
                 }
@@ -76,7 +75,7 @@ public class Home extends AppCompatActivity {
                 }
 
                 if (item.getItemId() == R.id.nav_chat) {
-                    Intent intent = new Intent(Home.this, Chat.class);
+                    Intent intent = new Intent(Home.this, ChatImplementation.class);
                     startActivity(intent);
                     toolbar.setTitle("Chat");
                 }
