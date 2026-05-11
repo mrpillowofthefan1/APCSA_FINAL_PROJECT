@@ -55,8 +55,6 @@ public class PaymentServer {
     }
 
     static int calculateOrderAmount(CreatePaymentItem[] items) {
-        // Calculate the order total on the server to prevent
-        // people from directly manipulating the amount on the client
         int total = 0;
         for (CreatePaymentItem item : items) {
             total += item.getAmount();

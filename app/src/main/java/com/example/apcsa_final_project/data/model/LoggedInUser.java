@@ -1,18 +1,16 @@
 package com.example.apcsa_final_project.data.model;
 
-/**
- * Data class that captures user information for logged in users retrieved from LoginRepository
- */
-public class LoggedInUser {
+// base class for users
+public abstract class LoggedInUser {
 
-    private String userId;
-    private String role;
-    private String displayName;
+    private final String userId;
+    private final String displayName;
+    private final String role;
 
-    public LoggedInUser(String userId, String role, String displayName) {
+    public LoggedInUser(String userId, String displayName, String role) {
         this.userId = userId;
-        this.role = role;
         this.displayName = displayName;
+        this.role = role;
     }
 
     public String getUserId() {
@@ -22,4 +20,11 @@ public class LoggedInUser {
     public String getDisplayName() {
         return displayName;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    // polymorphic method for different titles
+    public abstract String getDashboardTitle();
 }

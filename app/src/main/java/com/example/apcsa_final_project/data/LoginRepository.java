@@ -12,11 +12,8 @@ public class LoginRepository {
 
     private LoginDataSource dataSource;
 
-    // If user credentials will be cached in local storage, it is recommended it be encrypted
-    // @see https://developer.android.com/training/articles/keystore
     private LoggedInUser user = null;
 
-    // private constructor : singleton access
     private LoginRepository(LoginDataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -32,6 +29,10 @@ public class LoginRepository {
         return user != null;
     }
 
+    public LoggedInUser getUser() {
+        return user;
+    }
+
     public void logout() {
         user = null;
         dataSource.logout();
@@ -39,13 +40,20 @@ public class LoginRepository {
 
     private void setLoggedInUser(LoggedInUser user) {
         this.user = user;
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> login(String username, String password, String role) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
+        Result<LoggedInUser> result = dataSource.login(username, password, role);
+        if (result instanceof Result.Success) {
+            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+        }
+        return result;
+    }
+
+    public Result<LoggedInUser> register(String username, String password, String role) {
+        // handle register
+        Result<LoggedInUser> result = dataSource.register(username, password, role);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }

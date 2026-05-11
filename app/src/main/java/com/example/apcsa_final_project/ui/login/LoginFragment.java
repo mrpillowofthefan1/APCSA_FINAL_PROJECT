@@ -50,7 +50,9 @@ public class LoginFragment extends Fragment {
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
+        final Button registerButton = binding.register;
         final ProgressBar loadingProgressBar = binding.loading;
+        final android.widget.RadioGroup roleGroup = binding.roleGroup;
 
         loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new Observer<LoginFormState>() {
             @Override
@@ -77,6 +79,9 @@ public class LoginFragment extends Fragment {
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
+                }
+                if (loginResult.getErrorMessage() != null) {
+                    showLoginFailed(loginResult.getErrorMessage());
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
@@ -108,8 +113,9 @@ public class LoginFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    String role = roleGroup.getCheckedRadioButtonId() == R.id.radio_farmer ? "Farmer" : "User";
                     loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                            passwordEditText.getText().toString(), role);
                 }
                 return false;
             }
@@ -119,27 +125,49 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
+                String role = roleGroup.getCheckedRadioButtonId() == R.id.radio_farmer ? "Farmer" : "User";
                 loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                        passwordEditText.getText().toString(), role);
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                String role = roleGroup.getCheckedRadioButtonId() == R.id.radio_farmer ? "Farmer" : "User";
+                loginViewModel.register(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString(), role);
             }
         });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String welcome = model.getDashboardTitle();
         // TODO : initiate successful logged in experience
         if (getContext() != null && getContext().getApplicationContext() != null) {
             Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+            
+            // Navigate to Home or specific page based on role
+            android.content.Intent intent = new android.content.Intent(getActivity(), com.example.apcsa_final_project.Home.class);
+            intent.putExtra("ROLE", model.getRole());
+            intent.putExtra("DISPLAY_NAME", model.getDisplayName());
+            startActivity(intent);
+            getActivity().finish();
         }
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
+    private void showLoginFailed(String errorString) {
         if (getContext() != null && getContext().getApplicationContext() != null) {
             Toast.makeText(
                     getContext().getApplicationContext(),
                     errorString,
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void showLoginFailed(@StringRes Integer errorString) {
+        showLoginFailed(getString(errorString));
     }
 
     @Override

@@ -52,37 +52,29 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Handle the selected item based on its ID
+                Intent intent = null;
                 if (item.getItemId() == R.id.nav_home) {
-                    Intent intent = new Intent(MainActivity.this, Home.class);
-                    startActivity(intent);
+                    intent = new Intent(MainActivity.this, Home.class);
                     toolbar.setTitle("Home");
-                }
-
-                if (item.getItemId() == R.id.nav_forum) {
-                    Intent intent = new Intent(MainActivity.this, Forum.class);
-                    startActivity(intent);
+                } else if (item.getItemId() == R.id.nav_forum) {
+                    intent = new Intent(MainActivity.this, Forum.class);
                     toolbar.setTitle("Forum");
-                }
-
-                if (item.getItemId() == R.id.nav_start_guide) {
-                    Intent intent = new Intent(MainActivity.this, StartGuide.class);
-                    startActivity(intent);
+                } else if (item.getItemId() == R.id.nav_start_guide) {
+                    intent = new Intent(MainActivity.this, StartGuide.class);
                     toolbar.setTitle("Start Guide");
-                }
-                if (item.getItemId() == R.id.nav_market) {
-                    Intent intent = new Intent(MainActivity.this, Market.class);
-                    startActivity(intent);
+                } else if (item.getItemId() == R.id.nav_market) {
+                    intent = new Intent(MainActivity.this, Market.class);
                     toolbar.setTitle("Market");
-                }
-
-                if (item.getItemId() == R.id.nav_chat) {
-                    Intent intent = new Intent(MainActivity.this, ChatImplementation.class);
-                    startActivity(intent);
+                } else if (item.getItemId() == R.id.nav_chat) {
+                    intent = new Intent(MainActivity.this, ChatImplementation.class);
                     toolbar.setTitle("Chat");
                 }
 
-
+                if (intent != null) {
+                    intent.putExtra("ROLE", getIntent().getStringExtra("ROLE"));
+                    intent.putExtra("DISPLAY_NAME", getIntent().getStringExtra("DISPLAY_NAME"));
+                    startActivity(intent);
+                }
 
                 drawerLayout.closeDrawers();
                 return true;

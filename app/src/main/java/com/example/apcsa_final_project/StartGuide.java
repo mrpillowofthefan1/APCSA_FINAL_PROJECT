@@ -60,14 +60,21 @@ public class StartGuide extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
                 if (item.getItemId() == R.id.nav_home) {
-                    startActivity(new Intent(StartGuide.this, Home.class));
+                    intent = new Intent(StartGuide.this, Home.class);
                 } else if (item.getItemId() == R.id.nav_forum) {
-                    startActivity(new Intent(StartGuide.this, Forum.class));
+                    intent = new Intent(StartGuide.this, Forum.class);
                 } else if (item.getItemId() == R.id.nav_market) {
-                    startActivity(new Intent(StartGuide.this, Market.class));
+                    intent = new Intent(StartGuide.this, Market.class);
                 } else if (item.getItemId() == R.id.nav_chat) {
-                    startActivity(new Intent(StartGuide.this, ChatImplementation.class));
+                    intent = new Intent(StartGuide.this, ChatImplementation.class);
+                }
+                
+                if (intent != null) {
+                    intent.putExtra("ROLE", getIntent().getStringExtra("ROLE"));
+                    intent.putExtra("DISPLAY_NAME", getIntent().getStringExtra("DISPLAY_NAME"));
+                    startActivity(intent);
                 }
                 drawerLayout.closeDrawers();
                 return true;

@@ -11,11 +11,15 @@ import com.example.apcsa_final_project.data.Result;
 import com.example.apcsa_final_project.data.model.LoggedInUser;
 import com.example.apcsa_final_project.R;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
     LoginViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
@@ -29,15 +33,34 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
-        // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+    public void login(String username, String password, String role) {
+        executor.execute(() -> {
+            Result<LoggedInUser> result = loginRepository.login(username, password, role);
+            handleResult(result);
+        });
+    }
 
+    public void register(String username, String password, String role) {
+        executor.execute(() -> {
+            Result<LoggedInUser> result = loginRepository.register(username, password, role);
+            handleResult(result);
+        });
+    }
+
+    private void handleResult(Result<LoggedInUser> result) {
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            loginResult.postValue(new LoginResult(new LoggedInUserView(
+                    data.getDisplayName(),
+                    data.getDashboardTitle(),
+                    data.getRole()
+            )));
         } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
+            String errorMsg = "Login failed";
+            if (result instanceof Result.Error) {
+                errorMsg = ((Result.Error) result).getError().getMessage();
+            }
+            loginResult.postValue(new LoginResult(errorMsg));
         }
     }
 
@@ -51,7 +74,6 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    // A placeholder username validation check
     private boolean isUserNameValid(String username) {
         if (username == null) {
             return false;
@@ -63,7 +85,6 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    // A placeholder password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
     }
