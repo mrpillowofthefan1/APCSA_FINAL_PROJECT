@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+// adapter for thread comments
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     private final List<CommentObject> comments;
 
@@ -31,6 +32,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.content.setText(comment.getContent());
         holder.date.setText(comment.getCreatedAt());
 
+        // color role based on if farmer or user
         if ("Farmer".equalsIgnoreCase(comment.getRole())) {
             holder.role.setTextColor(Color.parseColor("#4CAF50"));
         } else {

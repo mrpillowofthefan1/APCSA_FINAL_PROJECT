@@ -1,8 +1,6 @@
 package com.example.apcsa_final_project;
 
-/**
- * Representing a Forum Thread or Main Post
- */
+// object for a forum thread
 public class PostObject {
     private int id;
     private String username;

@@ -2,9 +2,7 @@ package com.example.apcsa_final_project.ui.login;
 
 import androidx.annotation.Nullable;
 
-/**
- * Authentication result : success (user details) or error message.
- */
+// class for login results
 class LoginResult {
     @Nullable
     private LoggedInUserView success;

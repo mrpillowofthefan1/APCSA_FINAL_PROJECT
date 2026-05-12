@@ -22,11 +22,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
 import com.example.apcsa_final_project.data.LoginRepository;
 import com.example.apcsa_final_project.data.LoginDataSource;
 import com.example.apcsa_final_project.data.model.LoggedInUser;
 
+// activity for viewing one forum thread and its comments
 public class ForumThreadActivity extends AppCompatActivity {
     private int threadId;
     private RecyclerView recyclerView;
@@ -41,6 +41,7 @@ public class ForumThreadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_thread);
 
+        // get intent data from forum list
         threadId = getIntent().getIntExtra("THREAD_ID", 0);
         String threadTitle = getIntent().getStringExtra("THREAD_TITLE");
 
@@ -55,6 +56,7 @@ public class ForumThreadActivity extends AppCompatActivity {
         editCommentContent = findViewById(R.id.edit_comment_content);
         ImageButton buttonSendComment = findViewById(R.id.button_send_comment);
 
+        // setup list for comments
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CommentAdapter(commentList);
         recyclerView.setAdapter(adapter);
@@ -64,6 +66,7 @@ public class ForumThreadActivity extends AppCompatActivity {
         buttonSendComment.setOnClickListener(v -> submitComment());
     }
 
+    // gets comments for this thread from php
     private void fetchComments() {
         Request request = new Request.Builder()
                 .url(BASE_URL + "get_comments.php?thread_id=" + threadId)
@@ -99,10 +102,12 @@ public class ForumThreadActivity extends AppCompatActivity {
         });
     }
 
+    // sends a reply to the server
     private void submitComment() {
         String content = editCommentContent.getText().toString().trim();
         if (content.isEmpty()) return;
 
+        // find who is logged in
         LoggedInUser user = LoginRepository.getInstance(new LoginDataSource()).getUser();
         
         String username = "Anonymous";
@@ -118,6 +123,7 @@ public class ForumThreadActivity extends AppCompatActivity {
             if (extraRole != null) role = extraRole;
         }
 
+        // make json for post request
         JSONObject json = new JSONObject();
         try {
             json.put("thread_id", threadId);

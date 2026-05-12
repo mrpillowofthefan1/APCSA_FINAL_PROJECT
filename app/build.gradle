@@ -78,3 +78,16 @@ dependencies {
     implementation libs.guava
     implementation libs.glide
 }
+
+task makeJar(type: Jar) {
+    // include compiled classes
+    from fileTree(dir: 'build/intermediates/javac/release/classes/', include: '**/*.class')
+    from android.sourceSets.main.java.srcDirs
+    
+    archiveFileName = "APCSA_Final_Project.jar"
+    destinationDirectory = layout.buildDirectory.dir("outputs")
+}
+
+task clearJar(type: Delete) {
+    delete "$buildDir/outputs/APCSA_Final_Project.jar"
+}

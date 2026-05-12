@@ -2,9 +2,7 @@ package com.example.apcsa_final_project.ui.login;
 
 import androidx.annotation.Nullable;
 
-/**
- * Data validation state of the login form.
- */
+// class for login form validation status
 class LoginFormState {
     @Nullable
     private Integer usernameError;

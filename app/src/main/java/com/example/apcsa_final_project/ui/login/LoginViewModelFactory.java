@@ -3,14 +3,10 @@ package com.example.apcsa_final_project.ui.login;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
-
 import com.example.apcsa_final_project.data.LoginDataSource;
 import com.example.apcsa_final_project.data.LoginRepository;
 
-/**
- * ViewModel provider factory to instantiate LoginViewModel.
- * Required given LoginViewModel has a non-empty constructor
- */
+// factory to make the login viewmodel
 public class LoginViewModelFactory implements ViewModelProvider.Factory {
 
     @NonNull

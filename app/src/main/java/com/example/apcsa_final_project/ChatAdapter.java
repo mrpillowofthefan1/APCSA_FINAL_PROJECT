@@ -4,16 +4,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
+// adapter for displaying chat messages
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 
     private List<ChatMessage> chatMessages;
 
+    // constructor for adapter
     public ChatAdapter(List<ChatMessage> chatMessages) {
         this.chatMessages = chatMessages;
     }
@@ -25,9 +25,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         return new ChatViewHolder(view);
     }
 
+    // binds message data to the view
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         ChatMessage message = chatMessages.get(position);
+        // if user sent it show user bubble else show bot bubble
         if (message.isUser()) {
             holder.textUser.setVisibility(View.VISIBLE);
             holder.textBot.setVisibility(View.GONE);
@@ -44,6 +46,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         return chatMessages.size();
     }
 
+    // viewholder class for chat items
     static class ChatViewHolder extends RecyclerView.ViewHolder {
         TextView textUser;
         TextView textBot;

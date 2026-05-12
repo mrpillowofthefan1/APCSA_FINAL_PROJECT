@@ -37,6 +37,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+// dialog for farmers to add new stuff
 public class AddProductDialogFragment extends DialogFragment {
 
     private EditText editName, editPrice, editDescription, editSpecificDetail;
@@ -47,6 +48,7 @@ public class AddProductDialogFragment extends DialogFragment {
     private String farmerUsername;
     private String encodedImage = "";
 
+    // opens gallery to pick a pic
     private final ActivityResultLauncher<Intent> imagePickerLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -64,6 +66,7 @@ public class AddProductDialogFragment extends DialogFragment {
             }
     );
 
+    // creates a new instance of the dialog
     public static AddProductDialogFragment newInstance(String username) {
         AddProductDialogFragment fragment = new AddProductDialogFragment();
         Bundle args = new Bundle();
@@ -93,18 +96,25 @@ public class AddProductDialogFragment extends DialogFragment {
         buttonSelectImage = view.findViewById(R.id.button_select_image);
         imagePreview = view.findViewById(R.id.image_preview);
         progressBar = view.findViewById(R.id.loading_progress);
+
+        // fill spinner with categories
         String[] types = {"Plant", "Tool", "Seed", "Produce"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(adapter);
+
+        // click listener for image selection
         buttonSelectImage.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             imagePickerLauncher.launch(intent);
         });
+
+        // listener for submittion
         buttonSubmit.setOnClickListener(v -> submitProduct());
         return view;
     }
 
+    // turns bitmap into string for sending to server
     private String encodeImage(Bitmap bitmap) {
         int previewWidth = 480;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
@@ -115,18 +125,23 @@ public class AddProductDialogFragment extends DialogFragment {
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
+    // sends product data to the backend
     private void submitProduct() {
         String name = editName.getText().toString().trim();
         String price = editPrice.getText().toString().trim();
         String description = editDescription.getText().toString().trim();
         String type = spinnerType.getSelectedItem().toString();
         String specificDetail = editSpecificDetail.getText().toString().trim();
+
         if (name.isEmpty() || price.isEmpty() || description.isEmpty()) {
             Toast.makeText(getContext(), "Please fill in all basic fields", Toast.LENGTH_SHORT).show();
             return;
         }
+
         progressBar.setVisibility(View.VISIBLE);
         buttonSubmit.setEnabled(false);
+
+        // make json for post body
         JSONObject json = new JSONObject();
         try {
             json.put("item_name", name);
@@ -139,9 +154,11 @@ public class AddProductDialogFragment extends DialogFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json; charset=utf-8"));
         Request request = new Request.Builder().url(NetworkConfig.BASE_URL + "add_product.php").post(body).build();
+
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -152,6 +169,7 @@ public class AddProductDialogFragment extends DialogFragment {
                     Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
             }
+
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (getActivity() == null) return;
@@ -172,6 +190,7 @@ public class AddProductDialogFragment extends DialogFragment {
         });
     }
 
+    // makes dialog full width
     @Override
     public void onStart() {
         super.onStart();

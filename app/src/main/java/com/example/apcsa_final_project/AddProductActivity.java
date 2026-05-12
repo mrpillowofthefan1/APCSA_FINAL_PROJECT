@@ -9,16 +9,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -27,6 +23,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+// activity for adding a product (now usually handled by dialog)
 public class AddProductActivity extends AppCompatActivity {
     private static final String TAG = "AddProductActivity";
     private static final String BACKEND_URL = "http://192.168.0.88:8888/src/add_product.php";
@@ -42,6 +39,7 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
 
+        // get username from login
         farmerUsername = getIntent().getStringExtra("DISPLAY_NAME");
         if (farmerUsername == null) farmerUsername = "Farmer";
 
@@ -53,6 +51,7 @@ public class AddProductActivity extends AppCompatActivity {
         buttonSubmit = findViewById(R.id.button_submit);
         progressBar = findViewById(R.id.loading_progress);
 
+        // setup spinner with types
         String[] types = {"Plant", "Tool", "Seed", "Produce"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -61,6 +60,7 @@ public class AddProductActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(v -> submitProduct());
     }
 
+    // submits product to php script
     private void submitProduct() {
         String name = editName.getText().toString().trim();
         String price = editPrice.getText().toString().trim();
@@ -76,6 +76,7 @@ public class AddProductActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         buttonSubmit.setEnabled(false);
 
+        // make json data for post
         JSONObject json = new JSONObject();
         try {
             json.put("item_name", name);
@@ -119,6 +120,7 @@ public class AddProductActivity extends AppCompatActivity {
         });
     }
 
+    // shows error dialog
     private void showAlert(String title, String message) {
         new AlertDialog.Builder(this)
                 .setTitle(title)

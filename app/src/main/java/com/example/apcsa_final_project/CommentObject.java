@@ -1,5 +1,6 @@
 package com.example.apcsa_final_project;
 
+// object representing one comment
 public class CommentObject {
     private String username;
     private String role;

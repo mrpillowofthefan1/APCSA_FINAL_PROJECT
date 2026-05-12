@@ -6,17 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+// dialog that shows guide details
 public class StartGuideDialogFragment extends BottomSheetDialogFragment {
 
     private static final String ARG_TITLE = "arg_title";
     private static final String ARG_CONTENT = "arg_content";
 
+    // makes new dialog with data
     public static StartGuideDialogFragment newInstance(String title, String content) {
         StartGuideDialogFragment fragment = new StartGuideDialogFragment();
         Bundle args = new Bundle();
@@ -40,6 +40,7 @@ public class StartGuideDialogFragment extends BottomSheetDialogFragment {
         TextView contentView = view.findViewById(R.id.detail_content);
         Button closeButton = view.findViewById(R.id.btn_close);
 
+        // set text from arguments
         if (getArguments() != null) {
             titleView.setText(getArguments().getString(ARG_TITLE));
             contentView.setText(getArguments().getString(ARG_CONTENT));

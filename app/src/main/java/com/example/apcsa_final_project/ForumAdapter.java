@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+// adapter for forum thread list
 public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.ViewHolder> {
     private final List<PostObject> posts;
 
@@ -32,12 +33,14 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.ViewHolder> 
         holder.content.setText(post.getTitle());
         holder.date.setText(post.getCreatedAt());
 
+        // set role color based on type
         if ("Farmer".equalsIgnoreCase(post.getRole())) {
             holder.role.setTextColor(Color.parseColor("#4CAF50"));
         } else {
             holder.role.setTextColor(Color.parseColor("#2196F3"));
         }
 
+        // click to open thread details
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), ForumThreadActivity.class);
             intent.putExtra("THREAD_ID", post.getId());

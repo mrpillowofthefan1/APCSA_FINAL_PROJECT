@@ -8,18 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -29,9 +25,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+// handles stripe checkout process
 public class CheckoutActivity extends AppCompatActivity {
     private static final String TAG = "CheckoutActivity";
-    
     private static final String BACKEND_URL = NetworkConfig.BASE_URL + "checkout.php";
 
     private String checkoutUrl;
@@ -56,6 +52,7 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
+        // get product info from market
         itemName = getIntent().getStringExtra("ITEM_NAME");
         itemPriceCents = getIntent().getLongExtra("ITEM_PRICE_CENTS", 0);
         stripePriceId = getIntent().getStringExtra("STRIPE_PRICE_ID");
@@ -67,6 +64,7 @@ public class CheckoutActivity extends AppCompatActivity {
         detailsContainer = findViewById(R.id.details_container);
         progressBar = findViewById(R.id.checkout_progress);
 
+        // setup webview for stripe
         android.webkit.WebSettings webSettings = checkoutWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
@@ -84,6 +82,7 @@ public class CheckoutActivity extends AppCompatActivity {
         fetchCheckoutSession();
     }
 
+    // gets session url from php
     private void fetchCheckoutSession() {
         JSONObject jsonPayload = new JSONObject();
         try {
@@ -129,6 +128,7 @@ public class CheckoutActivity extends AppCompatActivity {
                         JSONObject responseJson = new JSONObject(responseBody);
                         checkoutUrl = responseJson.getString("url");
                         
+                        // auto load webview when we get url
                         runOnUiThread(() -> {
                             progressBar.setVisibility(View.GONE);
                             checkoutWebView.setVisibility(View.VISIBLE);
@@ -145,15 +145,16 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
+    // click handler for payment
     private void onPayClicked(View view) {
         if (checkoutUrl != null) {
             detailsContainer.setVisibility(View.GONE);
             checkoutWebView.setVisibility(View.VISIBLE);
-            
             checkoutWebView.loadUrl(checkoutUrl);
         }
     }
 
+    // handles android back button
     @Override
     public void onBackPressed() {
         if (checkoutWebView.getVisibility() == View.VISIBLE) {
@@ -168,6 +169,7 @@ public class CheckoutActivity extends AppCompatActivity {
         }
     }
 
+    // helper for alerts
     private void showAlert(String title, String message) {
         runOnUiThread(() -> {
             new AlertDialog.Builder(this)
